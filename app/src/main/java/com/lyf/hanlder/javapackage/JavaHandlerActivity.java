@@ -34,6 +34,8 @@ public class JavaHandlerActivity extends AppCompatActivity {
         myContext = this;
 
         initListener();
+
+
     }
 
     private void initListener() {

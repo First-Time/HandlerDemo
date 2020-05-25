@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,9 +36,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSendMessage.setOnClickListener {
+            sendMessageToMainThreadByWorkThread()
+        }
+    }
+
+    private fun sendMessageToMainThreadByWorkThread() {
+        val runnable = Runnable {
             var message = Message()
             message.what = 0x100
             myHandler.sendMessage(message)
         }
+
+        Thread(runnable).start()
     }
 }
