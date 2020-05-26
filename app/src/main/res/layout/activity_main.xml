@@ -16,12 +16,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSendMessage"
+        android:id="@+id/btnSubToMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="发送消息"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="子线程向主线程发消息"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnJavaHandler" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubToSub"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="子线程向子线程发消息"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSubToMain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

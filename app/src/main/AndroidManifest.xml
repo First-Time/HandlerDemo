@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lyf.hanlder">
+
+    <dist:module dist:instant="true" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +16,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode"
         tools:replace="android:debuggable">
-        <activity android:name=".javapackage.JavaHandlerActivity"></activity>
+        <activity android:name=".subtosub.SubToSubActivity"></activity>
+        <activity android:name=".subtomain.SubToMainActivity" />
+        <activity android:name=".javapackage.JavaHandlerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
