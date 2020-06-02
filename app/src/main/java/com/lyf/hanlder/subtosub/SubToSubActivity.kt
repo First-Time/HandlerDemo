@@ -1,9 +1,11 @@
 package com.lyf.hanlder.subtosub
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.lyf.hanlder.R
 import kotlinx.android.synthetic.main.activity_sub_to_sub.*
@@ -12,6 +14,7 @@ class SubToSubActivity : AppCompatActivity() {
 
     private lateinit var subHandler1: Handler
     private lateinit var subHandler2: Handler
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class SubToSubActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun createSubThread() {
         val subThread1 = Thread {
             Looper.prepare()
@@ -38,13 +42,16 @@ class SubToSubActivity : AppCompatActivity() {
                             this@SubToSubActivity,
                             "subThread1 接收到消息",
                             Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        ).show()
                         var message = subHandler1.obtainMessage(0x111)
                         subHandler2.sendMessageDelayed(message, 3000)
                     }
                 }
                 false
+            }
+            subHandler1.looper.queue.addIdleHandler {
+                println("queueIdle ${count++}")
+                return@addIdleHandler true
             }
             Looper.loop()
         }
@@ -60,8 +67,7 @@ class SubToSubActivity : AppCompatActivity() {
                             this@SubToSubActivity,
                             "subThread2 接收到消息",
                             Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        ).show()
                         var message = subHandler2.obtainMessage(0x100)
                         subHandler1.sendMessageDelayed(message, 3000)
                     }

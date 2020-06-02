@@ -1,17 +1,20 @@
 package com.lyf.hanlder.subtomain
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Handler.Callback
 import android.os.Message
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.lyf.hanlder.R
 import kotlinx.android.synthetic.main.activity_sub_to_main.*
 import java.lang.ref.WeakReference
 
 class SubToMainActivity : AppCompatActivity() {
+    private var count = 0
 
     /*private val myHandler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
@@ -60,11 +63,16 @@ class SubToMainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_to_main)
 
         initListener()
+        myHandler.looper.queue.addIdleHandler {
+            println("queueIdle ${count++}")
+            return@addIdleHandler true
+        }
     }
 
     private fun initListener() {
